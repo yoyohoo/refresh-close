@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<script>
+		// 方法1：
+		window.onbeforeunload = function(e) {
+			console.info('刷新写这里');
+		};
+		window.onunload = function() {
+			console.info('关闭写这里（点击刷新的时候执行不到； 地址栏回车执行得到）');
+		}
+
+		//方法2：
+		window.onload = function() {
+		return;
+			var checkRefresh = function() {
+				var b = false;
+				if (sessionStorage.visited) b = true;
+				else sessionStorage.visited = true;
+				return b;
+			}
+
+			if (checkRefresh()) console.info('refresh!');
+			else console.log('open');
+			// sessionStorage.clear();
+		}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
